@@ -31,19 +31,28 @@ namespace WinFormsTodoApp
             cbComplete.SelectedIndex = 0;
         }
 
+        //ADD DATA
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            //Add Todo
+ 
             string text = textTodo.Text;
             string complete = cbComplete.Text;
             DateTime date = DateTime.Now;
 
+            if(text.Length < 1)
+            {
+                MessageBox.Show("Please input a value!");
+            }
+            else
+            {
+                Todo todo = new Todo(text, complete, date);
+
+                collection.InsertOne(todo);
+                loadData();
+            }
             
 
-            Todo todo = new Todo(text, complete, date);
 
-            collection.InsertOne(todo);
-            loadData();
 
             textID.Text = "";
             textTodo.Text = "";
@@ -56,18 +65,26 @@ namespace WinFormsTodoApp
             dataGridView1.DataSource = list;
         }
 
+        //UPDATE DATA
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             string text = textTodo.Text;
             string complete = cbComplete.Text;
 
-            var update = Builders<Todo>.Update
-                                    .Set(x => x.Text, text)
-                                    .Set(x => x.Complete, complete);
 
+            if (text.Length < 1)
+            {
+                MessageBox.Show("Please input a value!");
+            }
+            else
+            {
+                var update = Builders<Todo>.Update
+                         .Set(x => x.Text, text)
+                         .Set(x => x.Complete, complete);
 
-            collection.UpdateOne(x => x.Id == ObjectId.Parse(textID.Text), update);
-            loadData();
+                collection.UpdateOne(x => x.Id == ObjectId.Parse(textID.Text), update);
+                loadData();
+            }
 
             textID.Text = "";
             textTodo.Text = "";
@@ -82,6 +99,7 @@ namespace WinFormsTodoApp
 
         }
 
+        //DELETE DATA
         private void btnDelete_Click(object sender, EventArgs e)
         {
             collection.DeleteOne(x => x.Id == ObjectId.Parse(textID.Text));
@@ -92,6 +110,7 @@ namespace WinFormsTodoApp
             cbComplete.Text = "";
         }
 
+        //DELETE ALL DATA
         private void btnDeleteAll_Click(object sender, EventArgs e)
         {
             var filterDefinition = Builders<Todo>.Filter.Empty;
@@ -103,6 +122,7 @@ namespace WinFormsTodoApp
             cbComplete.Text = "";
         }
 
+        //CLEAR TEXT
         private void btnClear_Click(object sender, EventArgs e)
         {
             textID.Text = "";
