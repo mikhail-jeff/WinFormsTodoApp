@@ -51,12 +51,11 @@ namespace WinFormsTodoApp
                 loadData();
             }
             
-
-
-
             textID.Text = "";
             textTodo.Text = "";
             cbComplete.Text = "";
+
+            cbComplete.SelectedIndex = 0;
         }
 
         public void loadData()
@@ -108,6 +107,8 @@ namespace WinFormsTodoApp
             textID.Text = "";
             textTodo.Text = "";
             cbComplete.Text = "";
+
+            cbComplete.SelectedIndex = 0;
         }
 
         //DELETE ALL DATA
@@ -120,6 +121,8 @@ namespace WinFormsTodoApp
             textID.Text = "";
             textTodo.Text = "";
             cbComplete.Text = "";
+
+            cbComplete.SelectedIndex = 0;
         }
 
         //CLEAR TEXT
@@ -128,6 +131,8 @@ namespace WinFormsTodoApp
             textID.Text = "";
             textTodo.Text = "";
             cbComplete.Text = "";
+
+            cbComplete.SelectedIndex = 0;
         }
 
         private void WinformsTodoApp_Load(object sender, EventArgs e)
