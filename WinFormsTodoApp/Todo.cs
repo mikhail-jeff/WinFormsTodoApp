@@ -18,18 +18,18 @@ namespace WinFormsTodoApp
         [BsonElement("text")]
         public string Text { get; set; }
 
-        [BsonElement("complete")]
-        public string Complete { get; set; }
+        [BsonElement("isComplete")]
+        public bool isComplete { get; set; }
 
         [BsonElement("createdAt")]
         public DateTime CreatedAt { get; set; }
 
 
         //CONSTRUCTOR
-        public Todo(string text, string complete, DateTime createdAt)
+        public Todo(string text, bool complete, DateTime createdAt)
         {
             Text = text;
-            Complete = complete;
+            isComplete = complete;
             CreatedAt = DateTime.Now;
         }
     }

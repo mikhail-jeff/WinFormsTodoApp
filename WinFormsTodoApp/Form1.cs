@@ -36,7 +36,7 @@ namespace WinFormsTodoApp
         {
  
             string text = textTodo.Text;
-            string complete = cbComplete.Text;
+            bool complete = Convert.ToBoolean(cbComplete.Text);
             DateTime date = DateTime.Now;
 
             if(text.Length < 1)
@@ -68,7 +68,7 @@ namespace WinFormsTodoApp
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             string text = textTodo.Text;
-            string complete = cbComplete.Text;
+            bool complete = Convert.ToBoolean(cbComplete.Text);
 
 
             if (text.Length < 1)
@@ -79,7 +79,7 @@ namespace WinFormsTodoApp
             {
                 var update = Builders<Todo>.Update
                          .Set(x => x.Text, text)
-                         .Set(x => x.Complete, complete);
+                         .Set(x => x.isComplete, complete);
 
                 collection.UpdateOne(x => x.Id == ObjectId.Parse(textID.Text), update);
                 loadData();
